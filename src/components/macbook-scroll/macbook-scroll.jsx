@@ -13,12 +13,12 @@ export function MacbookScrollDemo() {
     }, []);
 
     return (
-        <div className="overflow-hidden dark:bg-[#0B0B0F] bg-white w-full min-h-screen flex flex-col items-center justify-center">
+        <div className="overflow-hidden dark:bg-[#0B0B0F] bg-white w-full min-h-screen flex flex-col items-center justify-center px-2 sm:px-4 md:px-6">
             <MacbookScroll
                 title={
                     <span
                         className={`
-                            text-xl md:text-3xl font-semibold inline-block
+                            text-base sm:text-lg md:text-2xl lg:text-3xl font-semibold inline-block
                             transform transition-transform transition-opacity duration-[4000ms]
                             ease-[cubic-bezier(0.4,0,0.2,1)]
                             ${slideIn ? "translate-x-0 opacity-100" : "-translate-x-10 opacity-0"}
@@ -29,13 +29,13 @@ export function MacbookScrollDemo() {
                 }
                 badge={
                     <a href="https://peerlist.io/manuarora">
-                        <Badge className="h-10 w-10 transform -rotate-12" />
+                        <Badge className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 transform -rotate-12" />
                     </a>
                 }
                 src={myImage}
                 showGradient={false}
                 className="flex flex-col items-center justify-center"
-                imageClassName="object-contain" // Changed to object-contain to show full image
+                imageClassName="object-contain"
                 style={{}}
             />
         </div>

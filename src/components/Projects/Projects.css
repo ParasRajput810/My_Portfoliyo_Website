@@ -84,8 +84,13 @@
 .project-card img {
     width: 100%;
     height: auto;
+    max-height: 200px;
+    /* Default max height for larger screens */
+    object-fit: cover;
+    /* Ensures image maintains aspect ratio and covers the area */
     border-radius: 10px;
     margin-bottom: 20px;
+    display: block;
 }
 
 .project-card .card-title {
@@ -167,6 +172,11 @@
     .projects-grid {
         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     }
+
+    .project-card img {
+        max-height: 180px;
+        /* Slightly reduced height for tablets */
+    }
 }
 
 @media (max-width: 768px) {
@@ -177,6 +187,38 @@
     .projects-grid {
         grid-template-columns: 1fr;
         justify-items: center;
+    }
+
+    .project-card img {
+        max-height: 160px;
+        /* Further reduced height for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-section {
+        padding: 1.5rem;
+    }
+
+    .project-card {
+        padding: 15px;
+        max-width: 100%;
+        /* Ensure card takes full available width on very small screens */
+    }
+
+    .project-card img {
+        max-height: 140px;
+        /* Smaller height for mobile */
+    }
+
+    .project-card .card-title {
+        font-size: 1.25rem;
+        /* Smaller font size for titles on mobile */
+    }
+
+    .project-card .card-description {
+        font-size: 0.9rem;
+        /* Smaller font size for descriptions */
     }
 }
 
@@ -189,8 +231,9 @@
     .projects-mobile-list {
         display: flex !important;
         flex-direction: column;
-        gap: 2rem;
-        margin-top: 2rem;
+        gap: 1.5rem;
+        /* Reduced gap for mobile */
+        margin-top: 1.5rem;
     }
 }
 

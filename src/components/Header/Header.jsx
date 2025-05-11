@@ -123,16 +123,20 @@ const Header = () => {
                     <button onClick={() => setIsOpen(false)}>✕</button>
                 </div>
                 <div className="drawer-links">
-                    <a
-                        href="/projects"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setIsOpen(false);
-                            navigate('/projects');
-                        }}
-                    >
-                        Projects
-                    </a>
+                    {navLinks.map(link => (
+                        <a
+                            key={link.label}
+                            href={link.href}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setIsOpen(false);
+                                navigate(link.href);
+                            }}
+                        >
+                            {link.label}
+                        </a>
+                    ))}
+                    {/* Additional links for drawer if needed */}
                     <a
                         href="/skills"
                         onClick={(e) => {
@@ -143,7 +147,16 @@ const Header = () => {
                     >
                         Skills
                     </a>
-                    <a href="/certification" onClick={() => setIsOpen(false)}>Certifications</a>
+                    <a
+                        href="/certification"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setIsOpen(false);
+                            navigate('/certification');
+                        }}
+                    >
+                        Certifications
+                    </a>
                     {/* Updated Resume Link */}
                     <a href="/Paras_Resume.pdf" download className="resume-btn">
                         Download Resume
