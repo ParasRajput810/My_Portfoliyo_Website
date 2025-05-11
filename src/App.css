@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: transparent;
+  /* ✅ Change this from #000 to transparent or #fff */
+  color: #222;
+}
+
+.App {
+  padding-top: 80px;
+  /* space for fixed header */
+}
+
+.main-content {
+  padding: 2rem;
+}
+
+.hero-placeholder {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #999;
+}

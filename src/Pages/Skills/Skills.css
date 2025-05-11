@@ -1,0 +1,83 @@
+.skills-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    width: 100%;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    place-items: center;
+}
+
+.skill-card {
+    max-width: 340px;
+    min-height: 340px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skills-s1 {
+    font-size: 6vh;
+    font-weight: 900;
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+    margin-bottom: -5vh;
+}
+
+@media (max-width: 900px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .skills-section {
+        padding: 1.5rem 0.5rem;
+    }
+}
+
+/* Responsive: Mobile */
+@media (max-width: 600px) {
+    .skills-section {
+        padding: 1rem 0.2rem;
+    }
+
+    .skill-card {
+        padding: 1rem;
+        font-size: 0.98rem;
+    }
+
+    .skills-s1 {
+        font-size: 2rem !important;
+        text-align: center;
+    }
+}
+
+/* Optional: Make the sticky tool grids responsive too */
+.sticky-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+}
+
+@media (max-width: 900px) {
+    .sticky-tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .sticky-tools-grid {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+    }
+}
