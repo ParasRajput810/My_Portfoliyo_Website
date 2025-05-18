@@ -10,17 +10,25 @@ export function ThreeDCardDemo({ image, title, description }) {
     return (
         <CardContainer className="inter-var w-full max-w-[30rem]">
             <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full h-auto rounded-xl p-3 sm:p-4 md:p-6 border">
-                {/* Image wrapper with dark background */}
+                {/* Image wrapper with aspect ratio for perfect alignment */}
                 <CardItem
                     translateZ="100"
                     className="w-full mt-2 sm:mt-3 md:mt-4 relative overflow-hidden rounded-xl bg-black"
+                    style={{ aspectRatio: "16/9" }} // Ensures all images have the same ratio
                 >
                     <img
                         src={image}
-                        height="1000"
                         width="1000"
-                        className="h-48 sm:h-64 md:h-80 lg:h-96 w-full object-cover group-hover/card:shadow-xl"
+                        height="1000"
+                        className="w-full object-cover"
                         alt={title}
+                        style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                            borderRadius: "inherit",
+                            display: "block"
+                        }}
                     />
                 </CardItem>
 
