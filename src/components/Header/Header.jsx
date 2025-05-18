@@ -13,6 +13,9 @@ const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
 
+    // Filter navLinks for navbar on larger screens (include Home, Experience, and Projects)
+    const navbarLinks = navLinks; // Since Projects should be in both, we can use the full array
+
     return (
         <>
             <header className={`header ${isOpen ? 'open' : ''}`}>
@@ -95,7 +98,7 @@ const Header = () => {
                     </div>
 
                     <nav className="nav-buttons">
-                        {navLinks.map(link => (
+                        {navbarLinks.map(link => (
                             <button
                                 key={link.label}
                                 className="nav-button"

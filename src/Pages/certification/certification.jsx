@@ -81,28 +81,24 @@ function Certification() {
     return (
         <>
             <Header />
-            {/* Add enough top margin to avoid overlap with Header */}
-            <div className="min-h-screen bg-gradient-to-br from-[#181b20] to-[#23272f] text-white flex flex-col items-center py-10 px-4" style={{ marginTop: "55px" }}>
-                <div className="w-full max-w-3xl">
-                    <div className="flex justify-between items-center mb-8">
-                        <h1 className="text-5xl font-bold tracking-tight">Certification</h1>
+            <div className="certs-root">
+                <div className="certs-bg-glow" />
+                <div className="certs-main">
+                    <div className="certs-header-row">
+                        <h1 className="certs-title">Certification</h1>
                         <button
-                            className={`border border-gray-500 rounded-lg px-8 py-2 text-lg font-medium transition
-                ${selectedCert ? "hover:bg-gray-700" : "opacity-50 cursor-not-allowed"}`}
+                            className={`certs-download-btn ${selectedCert ? "" : "disabled"}`}
                             onClick={handleDownload}
                             disabled={!selectedCert}
                         >
                             Download
                         </button>
                     </div>
-                    <div className="flex space-x-12 border-b border-gray-700 mb-6">
+                    <div className="certs-tabs">
                         {["Ongoing", "Completed"].map((t) => (
                             <button
                                 key={t}
-                                className={`pb-2 text-xl font-medium transition ${tab === t
-                                    ? "text-blue-400 border-b-2 border-blue-400"
-                                    : "text-gray-400 hover:text-white"
-                                    }`}
+                                className={`certs-tab-btn ${tab === t ? "active" : ""}`}
                                 onClick={() => {
                                     setTab(t);
                                     setSelectedCert(null);
@@ -113,21 +109,25 @@ function Certification() {
                             </button>
                         ))}
                     </div>
-                    <div className="space-y-6">
+                    <div className="certs-list">
                         {filteredCerts.map((cert) => (
                             <div
                                 key={cert.id}
-                                className={`flex items-center justify-between bg-[#23272f] rounded-2xl px-8 py-6 shadow transition cursor-pointer border border-transparent hover:border-blue-500 ${selectedCert && selectedCert.id === cert.id
-                                    ? "ring-2 ring-blue-400"
-                                    : ""
-                                    }`}
+                                className={`certs-item ${selectedCert && selectedCert.id === cert.id ? "active" : ""}`}
                                 onClick={() => {
                                     setSelectedCert(cert);
                                     setShowCreds(false);
                                 }}
+                                tabIndex={0}
+                                onKeyDown={e => {
+                                    if (e.key === "Enter" || e.key === " ") {
+                                        setSelectedCert(cert);
+                                        setShowCreds(false);
+                                    }
+                                }}
                             >
-                                <div className="flex items-center space-x-6">
-                                    <div className="bg-[#1a1d22] rounded-lg p-4">
+                                <div className="certs-item-left">
+                                    <div className="certs-item-icon">
                                         {/* Certificate icon */}
                                         <svg width="40" height="40" fill="none" viewBox="0 0 24 24">
                                             <rect width="24" height="24" rx="6" fill="#23272f" />
@@ -152,20 +152,16 @@ function Certification() {
                                         </svg>
                                     </div>
                                     <div>
-                                        <div className="text-2xl font-semibold">
-                                            {cert.name}
-                                        </div>
-                                        <div className="text-gray-400 text-lg">
-                                            Certified by {cert.org}
-                                        </div>
+                                        <div className="certs-item-name">{cert.name}</div>
+                                        <div className="certs-item-org">Certified by {cert.org}</div>
                                     </div>
                                 </div>
-                                <div className="flex items-center space-x-4">
-                                    <div className="text-gray-400 text-lg">{cert.date}</div>
+                                <div className="certs-item-right">
+                                    <div className="certs-item-date">{cert.date}</div>
                                     {tab === "Completed" && (
                                         <button
-                                            className="ml-2 bg-gray-800 hover:bg-blue-700 text-blue-300 px-4 py-1 rounded transition"
-                                            onClick={(e) => {
+                                            className="certs-creds-btn"
+                                            onClick={e => {
                                                 e.stopPropagation();
                                                 setSelectedCert(cert);
                                                 setShowCreds(true);
@@ -190,9 +186,9 @@ function Certification() {
                 </div>
                 {/* Side panel for creds */}
                 {showCreds && selectedCert && selectedCert.creds && (
-                    <div className="fixed top-0 right-0 h-full w-full sm:w-96 bg-[#181b20] shadow-2xl border-l border-gray-800 z-50 flex flex-col p-8 animate-fadeIn">
+                    <div className="certs-creds-panel">
                         <button
-                            className="self-end mb-4 text-gray-400 hover:text-white"
+                            className="certs-creds-close"
                             onClick={() => setShowCreds(false)}
                         >
                             <svg width="32" height="32" fill="none" viewBox="0 0 24 24">
@@ -205,17 +201,17 @@ function Certification() {
                                 />
                             </svg>
                         </button>
-                        <div className="flex-1 flex flex-col justify-center items-center">
-                            <div className="text-2xl font-bold mb-2">{selectedCert.name}</div>
-                            <div className="text-gray-400 mb-4">Certified by {selectedCert.org}</div>
-                            <div className="bg-gray-800 rounded-lg px-6 py-4 mb-4 w-full text-center">
-                                <div className="text-gray-300 text-lg mb-2">Credential ID:</div>
-                                <div className="text-blue-400 text-xl font-mono mb-2">{selectedCert.creds.id}</div>
+                        <div className="certs-creds-content">
+                            <div className="certs-creds-title">{selectedCert.name}</div>
+                            <div className="certs-creds-org">Certified by {selectedCert.org}</div>
+                            <div className="certs-creds-box">
+                                <div className="certs-creds-label">Credential ID:</div>
+                                <div className="certs-creds-id">{selectedCert.creds.id}</div>
                                 <a
                                     href={selectedCert.creds.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-blue-400 underline"
+                                    className="certs-creds-link"
                                 >
                                     Verify Credential
                                 </a>
@@ -223,15 +219,6 @@ function Certification() {
                         </div>
                     </div>
                 )}
-                <style>{`
-          .animate-fadeIn {
-            animation: fadeIn 0.3s;
-          }
-          @keyframes fadeIn {
-            from { opacity: 0; transform: translateX(40px);}
-            to { opacity: 1; transform: translateX(0);}
-          }
-        `}</style>
             </div>
         </>
     );
